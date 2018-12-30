@@ -33,16 +33,15 @@ app.homepage = function () {return chrome.runtime.getManifest().homepage_url};
 app.tab = {"open": function (url) {chrome.tabs.create({"url": url, "active": true})}};
 
 app.webRequest = function () {
-    console.log('config:',config);
-    console.log('chrome:',chrome);
-    console.log('chrome.webRequest:',chrome.webRequest);
-    console.log('chrome.webRequest.onHeadersReceived:',chrome.webRequest.onHeadersReceived);
     var onHeadersReceived = chrome.webRequest.onHeadersReceived.hasListener(config.onHeadersReceived);
     var onBeforeSendHeaders = chrome.webRequest.onBeforeSendHeaders.hasListener(config.onBeforeSendHeaders);
-    /*  */
-    if (onHeadersReceived) chrome.webRequest.onHeadersReceived.removeListener(config.onHeadersReceived, config.addon.URLS, ["blocking", "responseHeaders"]);
-    if (onBeforeSendHeaders) chrome.webRequest.onBeforeSendHeaders.removeListener(config.onBeforeSendHeaders, config.addon.URLS, ["blocking", "requestHeaders"]);
-    /*  */
+
+    if (onHeadersReceived) {
+        chrome.webRequest.onHeadersReceived.removeListener(config.onHeadersReceived, config.addon.URLS, ["blocking", "responseHeaders"]);
+    }
+    if (onBeforeSendHeaders) {
+        chrome.webRequest.onBeforeSendHeaders.removeListener(config.onBeforeSendHeaders, config.addon.URLS, ["blocking", "requestHeaders"]);
+    }
 
     chrome.webRequest.onHeadersReceived.addListener(config.onHeadersReceived, config.addon.URLS, ["blocking", "responseHeaders"]);
     chrome.webRequest.onBeforeSendHeaders.addListener(config.onBeforeSendHeaders, config.addon.URLS, ["blocking", "requestHeaders"]);
