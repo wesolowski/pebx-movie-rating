@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetector">
+    <phpmd_settings>
+      <MessDetectorConfiguration tool_path="D:/NEXUS/phpmd.phar" />
+    </phpmd_settings>
+  </component>
+</project>
